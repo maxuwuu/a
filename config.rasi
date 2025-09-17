@@ -1,129 +1,122 @@
+# config.rasi
 configuration {
-  modes: "window,drun,run,ssh";
-  font: "JetBrainsMono NF 18";
-  drun-display-format: "{name}";
+  modi: "drun,run"; 
+  show-icons: true;
+  icon-theme: "Gruvbox-Plus-Dark";  
+  display-drun: "Applications";
+  display-run: "Run";
+  drun-display-format: "{icon} {name}";
+  sort: true;
+  sorting-method: "fzf";
 }
 
+@theme "macos"
+
+
+# macos.rasi
+/*
+ * Rofi theme for a macOS-like Spotlight menu with Gruvbox colors.
+ */
+
 * {
-  // general
-  bg: #282828;
-  bgt: #28282895;
-  t: transparent;
-  fg: #d4be98;
+  bg0:      #141617e6;
+  bg1:      #3c3836;
+  bg2:      #504945;
+  bg3:      #665c54;
+  bg4:      #7c6f64;
 
-  selected-bg: @fg;
-  selected-fg: @bg;
+  fg0:      #fbf1c7;
+  fg1:      #ebdbb2;
+  fg2:      #d5c4a1;
+  fg3:      #bdae93;
+  fg4:      #a89984;
 
-  // for windows
-  active: #a9b665;
-  urgent: #fb4934;
+  red:      #cc241d;
+  green:    #98971a;
+  yellow:   #d79921;
+  blue:     #458588;
+  purple:   #b16286;
+  aqua:     #689d6a;
+  orange:   #d65d0e;
+  gray:     #928374;
+ 
+  accent:   #ebdbb2;
+
+  background-color: transparent;
+  text-color:       @fg0;
+
+  font: "JetBrainsMono Nerd Font 12";
+
+  margin:  0;
+  padding: 0;
+  spacing: 0;
 }
 
 window {
-  fullscreen: true;
-  padding: 35% 30%;       // you might want to ajust these to resize rofi.
+  location: center;
+  width:    650px;
+  padding:  25px;
+  border-radius: 16px;
+  background-color: @bg0;
   transparency: "real";
-  background-color: @bgt;
-  border-color: @t;
 }
 
-listview {
-  border: 0 0 0 0;
-  padding: 23 0 0;
-  scrollbar: true;
-}
-
-scrollbar {
-    width:        4px;
-    border:       0;
-    handle-color: @fg;
-    handle-width: 8px;
-    padding:      0 5;
-}
-
-entry {
-    placeholder: "";
-}
-
-// less interesting stuff {{{
-
-// using elements from:
-// https://github.com/bardisty/gruvbox-rofi/blob/master/gruvbox-common.rasi
-
-textbox {
-    text-color: @fg;
-}
-
-element {
-    border:  0;
-    padding: 2px;
-}
-element.normal.normal {
-    background-color: @t;
-    text-color:       @fg;
-}
-element.normal.urgent {
-    background-color: @t;
-    text-color:       @urgent;
-}
-element.normal.active {
-    background-color: @t;
-    text-color:       @active;
-}
-element.selected.normal {
-    background-color: @selected-bg;
-    text-color:       @selected-fg;
-}
-element.selected.urgent {
-    background-color: @selected-bg;
-    text-color:       @urgent;
-}
-element.selected.active {
-    background-color: @selected-bg;
-    text-color:       @selected-fg;
-}
-element.alternate.normal {
-    background-color: @t;
-    text-color:       @fg;
-}
-element.alternate.urgent {
-    background-color: @t;
-    text-color:       @urgent;
-}
-element.alternate.active {
-    background-color: @t;
-    text-color:       @active;
-}
-
-sidebar {
-    border:       2px 0 0;
-    border-color: @fg;
+mainbox {
+  children: [ inputbar, listview ];
 }
 
 inputbar {
-    spacing:    0;
-    text-color: @fg;
-    padding:    2px;
-    children:   [ prompt, textbox-prompt-sep, entry, case-indicator ];
+  children: [ prompt, entry ];
+  padding: 12px;
+  margin-bottom: 25px;
 }
 
-case-indicator,
-entry,
-prompt,
-button {
-    spacing:    0;
-    text-color: @fg;
+prompt {
+  enabled: false;
 }
 
-button.selected {
-    background-color: @bg;
-    text-color:       @fg;
+entry {
+  placeholder: "Search with Gruvbox...";
+  placeholder-color: @fg3;
+  padding: 8px;
+  text-color: @fg0;
+  font: "JetBrainsMono Nerd Font 14";
 }
 
-textbox-prompt-sep {
-    expand:     false;
-    str:        ":";
-    text-color: @fg;
-    margin:     0 0.3em 0 0;
+listview {
+  columns: 1;
+  lines: 8;
+  layout: vertical;
+  fixed-height: true;
 }
-// }}}
+
+element {
+  padding: 10px;
+  border-radius: 10px;
+  text-color: @fg1;
+}
+
+element-icon {
+  size: 28px;
+  padding: 0 12px 0 0;
+}
+
+element-text {
+  text-color: inherit;
+}
+
+element selected {
+  background-color: @accent;
+  text-color: @bg0;
+}
+
+element normal.normal {
+    background-color: transparent;
+    text-color:       inherit;
+}
+
+element alternate.normal {
+    background-color: transparent;
+    text-color:       inherit;
+}
+© 2025 SphericalKat 
